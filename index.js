@@ -11,3 +11,24 @@ const pages = document.querySelectorAll(".page");
 const burger = document.getElementById("burger");
 const navLinksContainer = document.getElementById("nav-links");
 
+
+//    NAVIGATION CLICK EVENTS
+
+
+navLinks.forEach(link => {
+    link.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const pageName = link.dataset.page;
+        if (!pageName) return;
+
+        // Remove active class from all nav links
+        navLinks.forEach(l => l.classList.remove("active"));
+
+        // Add active class to the clicked nav item
+        link.classList.add("active");
+
+        // Trigger page switch
+        showPage(pageName);
+    });
+});
