@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoFood Tracker</title>
+    
+    <link rel="stylesheet" href="styles.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+
+    <header class="site-header">
+        <nav class="navbar container">
+            <a href="#" class="logo" data-page="home">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.22 8.39C16.22 8.39 15.3 9.3 15.3 9.3C15.3 9.3 16.25 10.23 16.25 10.23C17.15 10.3 18 11.14 18 12.18C18 13.53 16.88 14.65 15.52 14.65C15.22 14.65 14.93 14.59 14.67 14.49L13.13 16.03C13.91 16.34 14.76 16.5 15.65 16.5C18.12 16.5 20.15 14.58 20.15 12.18C20.15 10.39 18.77 8.89 17.03 8.54C16.78 8.49 16.51 8.44 16.22 8.39ZM12 4C13.06 4 14.06 4.28 14.93 4.77L8.77 10.93C8.28 10.06 8 9.06 8 8C8 5.79 9.79 4 12 4ZM8.39 8.78L14.49 14.67C14.59 14.93 14.65 15.22 14.65 15.52C14.65 16.88 13.53 18 12.18 18C11.14 18 10.3 17.15 10.23 16.25C10.23 16.25 9.3 15.3 9.3 15.3C9.3 15.3 8.39 16.22 8.39 16.22C8.44 16.51 8.49 16.78 8.54 17.03C8.89 18.77 10.39 20.15 12.18 20.15C14.58 20.15 16.5 18.12 16.5 15.65C16.5 14.76 16.34 13.91 16.03 13.13L10.93 8.77C10.06 9.22 9.06 9.5 8 9.5C5.79 9.5 4 7.71 4 5.5C4 4.54 4.24 3.65 4.66 2.88C3.12 4.2 2.25 6.09 2.25 8.18C2.25 10.39 3.6 12.28 5.5 12.87V12.87C6.01 12.72 6.47 12.48 6.87 12.17L8.39 8.78Z" fill="#3A8E71"/>
+                </svg>
+                <span>EcoFood Tracker</span>
+            </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="#" class="nav-link" data-page="search">Search</a></li>
+                <li><a href="#" class="nav-link" data-page="dashboard">Dashboard</a></li>
+                <li><a href="#" class="nav-link" data-page="profile">Profile</a></li>
+                <li><a href="#" class="nav-link" data-page="about">About</a></li>
+            </ul>
+            <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <section id="page-home" class="page active">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <span class="tag">Powered by OpenFoodFacts</span>
+                    <h1>Make Every Meal Healthier & Sustainable</h1>
+                    <p>Scan, search, and discover the nutritional value and environmental impact of your food. Make informed choices for your health and the planet.</p>
+                    <div class="hero-actions">
+                        <input type="search" class="hero-search" id="hero-search-input" placeholder="Search for food products...">
+                        <button class="btn btn-primary" id="hero-start-scanning">Start Scanning</button>
+                        <button class="btn btn-secondary" id="hero-learn-more">Learn More</button>
+                    </div>
+                </div>
+                <div class="hero-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1590779032111-6313659207d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                         alt="Fresh yellow bell peppers" 
+                         class="hero-image">
+                    <div class="hero-badge nutrition-badge">
+                        <span class="badge-grade">A</span>
+                        <div>
+                            <strong>Nutrition Score</strong>
+                            <span>Excellent</span>
+                        </div>
+                    </div>
+                    <div class="hero-badge co2-badge">
+                        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M15.03 10.47a.75.75 0 010 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06L10 14.44l3.97-3.97a.75.75 0 011.06 0zM15.03 6.47a.75.75 0 010 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06L10 10.44l3.97-3.97a.75.75 0 011.06 0z" clip-rule="evenodd"></path></svg>
+                        <div>
+                            <strong>CO₂ Saved</strong>
+                            <span>12.4 kg</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="page-search" class="page">
+            <h2>Search & Discover</h2>
+            <p>Find nutritional and environmental information for any food product.</p>
+            
+            <div class="search-large-wrapper">
+                <input type="search" id="main-search-input" class="search-large" placeholder="Search by product name, brand, or barcode...">
+            </div>
+
+            <div id="search-results-container">
+                </div>
+
+            <div class="card-grid three-cols">
+                <div class="card card-action" id="action-scan-barcode" tabindex="0" role="button">
+                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 4h16v2H4zm0 4h16v2H4zm0 4h16v2H4zM2 4h2v16H2zm18 0h2v16h-2z"></path></svg>
+                    <h3>Scan Barcode</h3>
+                    <p>Use your device camera to scan product barcodes.</p>
+                </div>
+                <div class="card card-action" id="action-upload-image" tabindex="0" role="button">
+                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 4h14v2H5z"></path></svg>
+                    <h3>Upload Image</h3>
+                    <p>Drag & drop or click to upload a product photo.</p>
+                    <input type="file" id="image-upload-input" class="hidden" accept="image/*">
+                    <img id="image-preview" class="hidden" alt="Image preview">
+                </div>
+                <div class="card card-action" id="action-enter-barcode" tabindex="0" role="button">
+                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M3 5h18v2H3zm0 4h18v2H3zm0 4h18v2H3zm0 4h18v2H3z"></path></svg>
+                    <h3>Enter Barcode</h3>
+                    <p>Manually enter a product barcode number.</p>
+                </div>
+            </div>
+
+            <h3>Recent Searches</h3>
+            <div class="chip-container" id="recent-searches">
+                <span class="chip">Almond Milk</span>
+                <span class="chip">Whole Grain Bread</span>
+                <span class="chip">Greek Yogurt</span>
+            </div>
+        </section>
+        <section id="page-dashboard" class="page">
+            <h2>Eco-Points Dashboard</h2>
+            <p>Track your progress and earn rewards for sustainable choices.</p>
+
+            <div class="dashboard-layout">
+                <div class="dashboard-main">
+                    <div class="card eco-points-card">
+                        <div class="points-info">
+                            <span class="points-label">Total Eco-Points</span>
+                            <span class="points-total" id="total-eco-points">1,247</span>
+                        </div>
+                        <div class="points-chart-wrapper">
+                            <canvas id="ecoPointsChart"></canvas>
+                            <div class="points-chart-text">
+                                <span id="eco-points-percentage">49%</span>
+                                <span>to Level 9</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Weekly Progress</h3>
+                        <div class="chart-container">
+                            <canvas id="weeklyProgressChart"></canvas>
+                        </div>
