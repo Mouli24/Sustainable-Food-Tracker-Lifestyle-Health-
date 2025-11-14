@@ -358,6 +358,35 @@
 
     <p id="scanner-status">Initializing camera…</p>
 </div>
+<!-- MANUAL BARCODE ENTRY MODAL -->
+<div id="barcode-overlay" class="hidden" style="
+    position: fixed; top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.5); backdrop-filter: blur(2px);
+    z-index: 9998;">
+</div>
+
+<div id="barcode-modal" class="card hidden" style="
+    position: fixed; top:50%; left:50%;
+    transform: translate(-50%, -50%);
+    padding:20px; z-index:9999; max-width:400px; width:90%;">
+    
+    <button id="barcode-close-btn" class="modal-close">&times;</button>
+
+    <h2>Enter Barcode</h2>
+    
+    <input id="barcode-input" 
+        placeholder="Enter product barcode…" 
+        style="width:100%; padding:12px; margin:12px 0; font-size:16px;">
+
+    <button id="barcode-search-btn" 
+        style="padding:10px 20px; width:100%; 
+        background:#3A8E71; color:white; border:none; cursor:pointer;">
+        Search Product
+    </button>
+
+    <div id="barcode-result" style="margin-top:15px;"></div>
+</div>
+
 
 </body>
 </html>
