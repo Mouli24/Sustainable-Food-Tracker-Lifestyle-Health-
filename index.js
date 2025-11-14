@@ -32,3 +32,23 @@ navLinks.forEach(link => {
         showPage(pageName);
     });
 });
+
+
+//   PAGE SWITCHING FUNCTION
+
+
+function showPage(pageName) {
+    pages.forEach(page => {
+        page.id === `page-${pageName}`
+            ? page.classList.add("active")
+            : page.classList.remove("active");
+    });
+
+    // Auto-focus search bar when search page opens
+    if (pageName === "search") {
+        setTimeout(() => {
+            const searchInput = document.getElementById("main-search-input");
+            if (searchInput) searchInput.focus();
+        }, 200);
+    }
+}
