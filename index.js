@@ -61,3 +61,22 @@ burger.addEventListener("click", () => {
     burger.classList.toggle("active");
     navLinksContainer.classList.toggle("active");
 });
+
+// dark mode 
+
+const darkModeToggle = document.getElementById("toggle-dark-mode");
+
+if (localStorage.getItem("theme") === "dark") {
+    document.documentElement.classList.add("dark-mode");
+    darkModeToggle.checked = true;
+}
+
+darkModeToggle.addEventListener("change", () => {
+    if (darkModeToggle.checked) {
+        document.documentElement.classList.add("dark-mode");
+        localStorage.setItem("theme", "dark");
+    } else {
+        document.documentElement.classList.remove("dark-mode");
+        localStorage.setItem("theme", "light");
+    }
+});
