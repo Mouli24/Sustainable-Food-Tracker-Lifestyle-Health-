@@ -52,3 +52,12 @@ function showPage(pageName) {
         }, 200);
     }
 }
+
+
+//  BURGER MENU (MOBILE)
+
+
+burger.addEventListener("click", () => {
+    burger.classList.toggle("active");
+    navLinksContainer.classList.toggle("active");
+});
