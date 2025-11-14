@@ -178,3 +178,75 @@ scanButtons.forEach(btn => {
 scannerClose.addEventListener("click", closeScanner);
 scannerOverlay.addEventListener("click", closeScanner);
 
+// ==================== MANUAL BARCODE ENTRY ==================== //
+
+const enterBarcodeBtn = document.getElementById("action-enter-barcode");
+
+const barcodeModal = document.getElementById("barcode-modal");
+const barcodeOverlay = document.getElementById("barcode-overlay");
+const barcodeClose = document.getElementById("barcode-close-btn");
+
+const barcodeInput = document.getElementById("barcode-input");
+const barcodeSearchBtn = document.getElementById("barcode-search-btn");
+const barcodeResult = document.getElementById("barcode-result");
+
+// Open modal
+enterBarcodeBtn.addEventListener("click", () => {
+    barcodeModal.classList.remove("hidden");
+    barcodeOverlay.classList.remove("hidden");
+});
+
+// Close modal
+barcodeClose.addEventListener("click", closeBarcodeModal);
+barcodeOverlay.addEventListener("click", closeBarcodeModal);
+
+function closeBarcodeModal() {
+    barcodeModal.classList.add("hidden");
+    barcodeOverlay.classList.add("hidden");
+    barcodeInput.value = "";
+    barcodeResult.innerHTML = "";
+}
+
+// Search Product
+barcodeSearchBtn.addEventListener("click", () => {
+    const code = barcodeInput.value.trim();
+    if (code.length < 4) {
+        barcodeResult.innerHTML = `<p style="color:red;">Please enter a valid barcode.</p>`;
+        return;
+    }
+    fetchBarcodeProduct(code);
+});
+
+// API Fetch Function
+async function fetchBarcodeProduct(code) {
+    barcodeResult.innerHTML = `<p>Loading product info...</p>`;
+
+    try {
+        const res = await fetch(`https://world.openfoodfacts.org/api/v2/product/${code}.json`);
+        const data = await res.json();
+
+        if (data.status === 0) {
+            barcodeResult.innerHTML = `<p style="color:red;">❌ Product not found</p>`;
+            return;
+        }
+
+        const p = data.product;
+
+        // Clean UI output — NO raw JSON
+        barcodeResult.innerHTML = `
+            <h3>${p.product_name || "Unnamed Product"}</h3>
+            <p><b>Brand:</b> ${p.brands || "Unknown"}</p>
+            <p><b>Quantity:</b> ${p.quantity || "N/A"}</p>
+            <p><b>Nutri-Score:</b> ${p.nutriscore_grade?.toUpperCase() || "N/A"}</p>
+            <p><b>Eco-Score:</b> ${p.ecoscore_grade?.toUpperCase() || "N/A"}</p>
+            
+            <img src="${p.image_front_small_url || p.image_url}" 
+                 alt="Product Image"
+                 style="width:120px; margin-top:10px; border-radius:8px;">
+        `;
+    }
+    catch (error) {
+        barcodeResult.innerHTML = `<p style="color:red;">Error fetching data.</p>`;
+        console.log(error);
+    }
+}
