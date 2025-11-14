@@ -80,3 +80,101 @@ darkModeToggle.addEventListener("change", () => {
         localStorage.setItem("theme", "light");
     }
 });
+// ==================== BARCODE SCANNER ==================== //
+
+let qr = null;
+let scanning = false;
+
+// Elements
+const scannerModal = document.getElementById("scanner-modal");
+const scannerOverlay = document.getElementById("scanner-overlay");
+const scannerClose = document.getElementById("scanner-close-btn");
+const scannerStatus = document.getElementById("scanner-status");
+
+const scanButtons = [
+    document.getElementById("hero-start-scanning"),
+    document.getElementById("action-scan-barcode")
+];
+
+// Fetch product from OpenFoodFacts
+async function fetchProduct(barcode) {
+    const url = `https://world.openfoodfacts.org/api/v2/product/${barcode}.json`;
+
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (data.status === 0) {
+            alert("❌ Product not found");
+            return;
+        }
+
+        const p = data.product;
+
+        alert(
+            `✔️ Product Found!\n\n` +
+            `Name: ${p.product_name}\n` +
+            `Brand: ${p.brands}\n` +
+            `Nutri-Score: ${p.nutriscore_grade}`
+        );
+
+    } catch (e) {
+        alert("Error fetching OpenFoodFacts API");
+        console.log(e);
+    }
+}
+
+// Open scanner
+async function openScanner() {
+    if (scanning) return;
+
+    scannerOverlay.classList.remove("hidden");
+    scannerModal.classList.remove("hidden");
+    scannerStatus.textContent = "Opening camera…";
+
+    if (!qr) {
+        qr = new Html5Qrcode("scanner-view");
+    }
+
+    scanning = true;
+
+    try {
+        await qr.start(
+            { facingMode: "environment" },
+            { fps: 10, qrbox: 250 },
+
+            async decodedText => {
+                await closeScanner();
+                fetchProduct(decodedText.trim());
+            }
+        );
+
+        scannerStatus.textContent = "Scanning…";
+
+    } catch (err) {
+        scannerStatus.textContent = "Camera error. Check permissions.";
+        console.error(err);
+    }
+}
+
+// Close scanner
+async function closeScanner() {
+    if (qr && scanning) {
+        try {
+            await qr.stop();
+        } catch (e) {}
+    }
+    scanning = false;
+
+    scannerOverlay.classList.add("hidden");
+    scannerModal.classList.add("hidden");
+}
+
+// Attach events
+scanButtons.forEach(btn => {
+    if (btn) btn.addEventListener("click", openScanner);
+});
+
+scannerClose.addEventListener("click", closeScanner);
+scannerOverlay.addEventListener("click", closeScanner);
+
