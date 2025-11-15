@@ -1081,3 +1081,44 @@ input:focus + .slider {
         flex: 1.2;
     }
 }
+
+
+
+
+
+/* Home Page Small Product Cards */
+.home-product-cards {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.home-mini-card {
+    width: 120px;
+    padding: 10px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.home-mini-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.home-mini-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.home-mini-card p {
+    margin-top: 6px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
